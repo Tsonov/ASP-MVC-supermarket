@@ -6,6 +6,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Core", "Supermarket.Core\Supermarket.Core.csproj", "{8EB3C20C-AFCD-45C7-8CA4-287574396FE2}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tsonov.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Supermarket.Core\\Supermarket.Core.csproj
+		SccProjectName1 = Supermarket.Core
+		SccLocalPath1 = Supermarket.Core
+		SccProjectUniqueName2 = Supermarket.Main\\Supermarket.Main.csproj
+		SccProjectName2 = Supermarket.Main
+		SccLocalPath2 = Supermarket.Main
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
