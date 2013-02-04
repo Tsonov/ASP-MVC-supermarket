@@ -1,0 +1,8 @@
+D:\Programming\Telerik\ASP MVC\Supermarket\Supermarket.Core\bin\Debug\Supermarket.Core.dll
+D:\Programming\Telerik\ASP MVC\Supermarket\Supermarket.Core\bin\Debug\Supermarket.Core.pdb
+D:\Programming\Telerik\ASP MVC\Supermarket\Supermarket.Core\obj\Debug\Supermarket.Core.csprojResolveAssemblyReference.cache
+D:\Programming\Telerik\ASP MVC\Supermarket\Supermarket.Core\obj\Debug\Supermarket.Core.dll
+D:\Programming\Telerik\ASP MVC\Supermarket\Supermarket.Core\obj\Debug\Supermarket.Core.pdb
+D:\Programming\Telerik\ASP MVC\Supermarket\Supermarket.Core\bin\Debug\Supermarket.Core.dll.config
+D:\Programming\Telerik\ASP MVC\Supermarket\Supermarket.Core\bin\Debug\EntityFramework.dll
+D:\Programming\Telerik\ASP MVC\Supermarket\Supermarket.Core\bin\Debug\EntityFramework.xml
