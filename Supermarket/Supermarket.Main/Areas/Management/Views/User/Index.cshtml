@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Supermarket.Main.Areas.Management.Models.UserInfoViewModel>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Registered users</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+             @if (Roles.IsUserInRole(item.UserName, "administrator") == false)
+             {
+                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "delete", @id = item.Id })
+             }
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('a.delete').click(OnDeleteClick);
+        });
+
+        function OnDeleteClick(e) {
+            var userId = e.target.id;
+            var flag = confirm('You are about to delete this user permanently?');
+
+            if (flag) {
+                $.ajax({
+
+                    url: 'User/DeleteAjax',
+
+                    type: 'POST',
+
+                    data: { id: userId },
+
+                    dataType: 'json',
+
+                    success: function (result) { alert(result); $("#" + userId).parent().parent().remove(); location.reload(); },
+
+                    error: function () { alert('Error!'); }
+                });
+            }
+            return false;
+        }
+    </script>
+}
