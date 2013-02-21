@@ -1,0 +1,28 @@
+﻿@model Supermarket.Main.Areas.Management.Models.CategoryViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>CategoryViewModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+    <ul>
+@foreach (var product in Model.Products)
+{
+    <li>@Html.ActionLink(product.Name, "Details", "Product", new { id = product.Id }, null)</li>
+}
+    </ul>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Supermarket.Core.Models
 {
@@ -12,7 +9,7 @@ namespace Supermarket.Core.Models
     public class Product
     {
         [Key]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(150)]
@@ -28,6 +25,11 @@ namespace Supermarket.Core.Models
 
         [Required]
         public decimal Price { get; set; }
+
+        [Range(0, double.MaxValue)]
+        public double Amount { get; set; }
+
+        public bool IsActive { get; set; }
 
         public int CategoryId { get; set; }
 

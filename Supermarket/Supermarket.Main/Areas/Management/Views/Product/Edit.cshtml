@@ -1,0 +1,71 @@
+﻿@model Supermarket.Main.Areas.Management.Models.ProductWithCategoriesViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Edit existing product</legend>
+
+        @Html.HiddenFor(model => model.ProductModel.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductModel.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductModel.Name)
+            @Html.ValidationMessageFor(model => model.ProductModel.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductModel.Manufacturer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductModel.Manufacturer)
+            @Html.ValidationMessageFor(model => model.ProductModel.Manufacturer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductModel.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductModel.Price)
+            @Html.ValidationMessageFor(model => model.ProductModel.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductModel.UnitMeasure)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductModel.UnitMeasure)
+            @Html.ValidationMessageFor(model => model.ProductModel.UnitMeasure)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductModel.CategoryName)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("categoryId", Model.AvailableCategories
+            .Select(cat => new SelectListItem() { Text = cat.Name, Value = cat.Id.ToString(), Selected = cat.Id == Model.ProductModel.CategoryId }))
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

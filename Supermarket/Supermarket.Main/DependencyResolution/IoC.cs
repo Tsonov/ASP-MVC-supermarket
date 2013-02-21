@@ -1,5 +1,5 @@
 using StructureMap;
-using Supermarket.Core;
+using Supermarket.Core.Repositories;
 using Supermarket.Main.DataInfrastructure;
 namespace Supermarket.Main {
     public static class IoC {
@@ -11,9 +11,10 @@ namespace Supermarket.Main {
                                         scan.TheCallingAssembly();
                                         scan.WithDefaultConventions();
                                     });
-                           x.For<IUsersRepository>().HttpContextScoped().Use<UsersContext>();
                         });
             return ObjectFactory.Container;
         }
+
+
     }
 }

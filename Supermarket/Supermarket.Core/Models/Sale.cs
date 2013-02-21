@@ -15,7 +15,7 @@ namespace Supermarket.Core.Models
         public int SaleId { get; private set; }
 
         [Required]
-        public DateTime TimeOfSale { get; set; }
+        public DateTime DateAndTime { get; set; }
 
         [Required]
         public decimal TotalAmountPaid { get; set; }

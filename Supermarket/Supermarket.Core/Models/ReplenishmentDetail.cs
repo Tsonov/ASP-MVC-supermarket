@@ -12,7 +12,6 @@ namespace Supermarket.Core.Models
     public class ReplenishmentDetail
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
 
         public int ProductId { get; set; }
@@ -25,6 +24,6 @@ namespace Supermarket.Core.Models
 
         public virtual ProductReplenishment ProductReplenishment { get; set; }
 
-        public decimal AmountPaidForProduct { get; set; }
+        public decimal TotalPaidForProduct { get; set; }
     }
 }

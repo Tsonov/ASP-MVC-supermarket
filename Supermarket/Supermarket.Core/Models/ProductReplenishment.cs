@@ -11,14 +11,14 @@ namespace Supermarket.Core.Models
     public class ProductReplenishment
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
 
         [Required]
-        public DateTime TimeOfReplenishment { get; set; }
+        public DateTime DateAndTime { get; set; }
 
-        public virtual ICollection<ReplenishmentDetail> ReplenishmentDetail { get; set; }
+        public virtual ICollection<ReplenishmentDetail> ReplenishmentDetails { get; set; }
 
+        [Range(0, double.MaxValue)]
         public decimal TotalAmountPaid { get; set; }
     }
 }

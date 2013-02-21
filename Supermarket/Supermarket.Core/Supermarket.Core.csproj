@@ -45,12 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\HistoryProductInfo.cs" />
+    <Compile Include="Repositories\ISupermarketItemsRepository.cs" />
     <Compile Include="Repositories\IUsersRepository.cs" />
     <Compile Include="Models\CashDesk.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ProductHistory.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductInStock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ReplenishmentDetail.cs" />
     <Compile Include="Models\Sale.cs" />

@@ -1,0 +1,57 @@
+﻿@model Supermarket.Main.Areas.Management.Models.ReplenishmentDetailsViewModel
+
+@{
+    ViewBag.Title = "LoadProducts";
+}
+
+<h2>Load products</h2>
+
+<div id="loadProductInfo">
+    @Html.LabelFor(model => model.Amount)
+    @Html.EditorFor(model => model.Amount)
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Load products</legend>
+        <table id="tblNewProducts">
+            <thead>
+                <tr>
+                    <td>Test</td>
+
+                    <td>Test 2</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" id="totalAmount" Value="0.00" disabled="disabled" />
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>
+            <input type="submit" value="Add products" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function() {
+            $('#loadProductInfo')
+                .append('<input type="button" id="btnLoadProducts" value="Add to replenishment list" />')
+                .on('click', function() {
+                    $("#tblNewProducts > tbody:last").append("<tr><td>test12151</td><td>ttt</td></tr>");
+                })
+        });
+    </script>
+}

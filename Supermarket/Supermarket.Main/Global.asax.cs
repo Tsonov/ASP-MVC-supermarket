@@ -6,6 +6,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using StructureMap;
+using Supermarket.Core.Repositories;
+using Supermarket.Main.DataInfrastructure;
 using WebMatrix.WebData;
 
 namespace Supermarket.Main
@@ -29,6 +32,21 @@ namespace Supermarket.Main
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
+        }
+
+        private static void InitStructureMap()
+        {
+
+            ObjectFactory.Initialize(x =>
+            {
+                x.For<IUsersRepository>().HttpContextScoped().Use<UsersRepository>();
+                x.For<ISupermarketItemsRepository>().HttpContextScoped().Use<SupermarketItemsRepository>();
+            });
+        }
+
+        protected void Application_EndRequest(object sender, EventArgs e)
+        {
+            ObjectFactory.ReleaseAndDisposeAllHttpScopedObjects();
         }
     }
 }

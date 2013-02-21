@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 using Supermarket.Core.Models;
@@ -14,6 +15,13 @@ namespace Supermarket.Main.DataInfrastructure
 
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
@@ -22,7 +30,6 @@ namespace Supermarket.Main.DataInfrastructure
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
         public DbSet<ReplenishmentDetail> ReplenishmentDetails { get; set; }
-        public DbSet<ProductInStock> ProductsInStock { get; set; }
         public DbSet<ProductHistory> ProductHistories { get; set; }
         public DbSet<HistoryProductInfo> HistoryProductInfos { get; set; }
     }

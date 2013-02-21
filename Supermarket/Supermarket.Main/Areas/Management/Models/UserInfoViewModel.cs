@@ -9,7 +9,7 @@ namespace Supermarket.Main.Areas.Management.Models
 {
     public class UserInfoViewModel
     {
-        public int Id { get; internal set; }
+        public int Id { get; set; }
 
         [ReadOnly(true)]
         [Display(Name = "User name")]

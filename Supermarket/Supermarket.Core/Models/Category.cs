@@ -13,12 +13,28 @@ namespace Supermarket.Core.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
+
+        public bool IsActive { get; set; }
+
+        [NotMapped]
+        public bool CanBeDeleted
+        {
+            get
+            {
+                if (this.Products == null ||
+                    this.Products.Where(p => p.IsActive == true).Count() == 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }

@@ -4,8 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using AutoMapper;
-using Supermarket.Core;
+using Supermarket.Core.Repositories;
 using Supermarket.Core.Models;
 using Supermarket.Main.Areas.Management.Models;
 using WebMatrix.WebData;
@@ -13,9 +12,9 @@ using WebMatrix.WebData;
 namespace Supermarket.Main.Areas.Management.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class UserController : Controller
+    public class UserController : AbstractAuthorizedController
     {
-        IUsersRepository _usersRepository;
+        private readonly IUsersRepository _usersRepository;
 
         public UserController(IUsersRepository userRepository)
         {
@@ -42,9 +41,9 @@ namespace Supermarket.Main.Areas.Management.Controllers
             var user = _usersRepository.GetUser(id);
             if (user != null)
             {
-                UserInfoViewModel userModel = new UserInfoViewModel();
-                Mapper.Map(user, userModel);
-                return View(userModel);
+                UserInfoViewModel userViewModel = new UserInfoViewModel();
+                AutoMapper.Mapper.Map(user, userViewModel);
+                return View(userViewModel);
             }
             else
             {
@@ -72,9 +71,7 @@ namespace Supermarket.Main.Areas.Management.Controllers
             {
                 try
                 {
-                    UserProfile newUser = new UserProfile();
-                    Mapper.Map(model, newUser);
-                    _usersRepository.AddUser(newUser, model.Password);
+                    _usersRepository.AddUser(model.UserName, model.Password, model.Email, model.FirstName, model.LastName);
                     return RedirectToAction("Index");
                 }
                 catch (MembershipCreateUserException ex)
@@ -96,9 +93,9 @@ namespace Supermarket.Main.Areas.Management.Controllers
             var user = _usersRepository.GetUser(id);
             if (user != null)
             {
-                UserInfoViewModel userView = new UserInfoViewModel();
-                Mapper.Map(user, userView);
-                return View(userView);
+                UserInfoViewModel userViewModel = new UserInfoViewModel();
+                AutoMapper.Mapper.Map(user, userViewModel);
+                return View(userViewModel);
             }
 
             return HttpNotFound();
@@ -113,17 +110,7 @@ namespace Supermarket.Main.Areas.Management.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _usersRepository.GetUser(model.Id);
-                if (user == null)
-                {
-                    //Something happened in the meantime or an invalid id was given, redirect for now
-                    return RedirectToAction("Index");
-                }
-
-                //TODO
-                user.Email = model.Email;
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
+                _usersRepository.UpdateUser(model.Id, model.Email, model.FirstName, model.LastName);
                 _usersRepository.Save();
                 return RedirectToAction("Index");
             }
@@ -132,17 +119,29 @@ namespace Supermarket.Main.Areas.Management.Controllers
             return View();
         }
 
-        public JsonResult DeleteAjax(int id)
+        [HttpGet]
+        public ActionResult Delete(int id)
         {
             var user = _usersRepository.GetUser(id);
             if (user != null)
             {
-                ((SimpleMembershipProvider)Membership.Provider).DeleteAccount(user.UserName);
-                Membership.DeleteUser(user.UserName);
-                return Json("User deleted successfully");
+                UserInfoViewModel userViewModel = new UserInfoViewModel();
+                AutoMapper.Mapper.Map(user, userViewModel);
+                return View(userViewModel);
             }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
 
-            return Json("Indalid user selected");
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(UserInfoViewModel userModel)
+        {
+            _usersRepository.DeleteUser(userModel.Id);
+            _usersRepository.Save();
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

@@ -28,42 +28,10 @@
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
              @if (Roles.IsUserInRole(item.UserName, "administrator") == false)
              {
-                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "delete", @id = item.Id })
+                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
              }
             </td>
         </tr>
     }
 
 </table>
-
-@section Scripts {
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-            $('a.delete').click(OnDeleteClick);
-        });
-
-        function OnDeleteClick(e) {
-            var userId = e.target.id;
-            var flag = confirm('You are about to delete this user permanently?');
-
-            if (flag) {
-                $.ajax({
-
-                    url: 'User/DeleteAjax',
-
-                    type: 'POST',
-
-                    data: { id: userId },
-
-                    dataType: 'json',
-
-                    success: function (result) { alert(result); $("#" + userId).parent().parent().remove(); location.reload(); },
-
-                    error: function () { alert('Error!'); }
-                });
-            }
-            return false;
-        }
-    </script>
-}

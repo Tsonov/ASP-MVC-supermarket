@@ -25,6 +25,6 @@ namespace Supermarket.Core.Models
 
         public double Amount { get; set; }
 
-        public decimal AmountPaidByCustomer { get; set; }
+        public decimal TotalPaidByCustomer { get; set; }
     }
 }

@@ -14,7 +14,10 @@ namespace Supermarket.Main
         {
             Mapper.CreateMap<UserProfile, UserInfoViewModel>()
                 .ForMember(destination => destination.Id, expression => expression.MapFrom(source => source.UserId));
-            //Mapper.Creat
+            Mapper.CreateMap<Category, CategoryViewModel>()
+                .ForMember(destination => destination.Products, expression => expression.MapFrom(source => source.Products));
+            Mapper.CreateMap<Product, ProductViewModel>();
+            
         }
     }
 }

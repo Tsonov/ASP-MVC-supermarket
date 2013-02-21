@@ -1,0 +1,50 @@
+﻿@model Supermarket.Main.Areas.Management.Models.ProductViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ProductViewModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Manufacturer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Manufacturer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UnitMeasure)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UnitMeasure)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

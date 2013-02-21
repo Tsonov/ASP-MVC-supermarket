@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Supermarket.Core.Models;
 
-namespace Supermarket.Core
+namespace Supermarket.Core.Repositories
 {
     public interface IUsersRepository : IDisposable
     {
         IQueryable<UserProfile> GetUsers();
         UserProfile GetUser(int id);
-        void AddUser(UserProfile userInfo, string password);
+        void AddUser(string userName, string password, string email, string firstName = "", string lastName = "");
         void DeleteUser(int id);
-        void UpdateUser(UserProfile user);
+        void UpdateUser(int id, string email, string firstName, string lastName);
         int Save();
     }
 }
