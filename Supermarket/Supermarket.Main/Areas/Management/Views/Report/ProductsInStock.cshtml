@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Supermarket.Main.Areas.Management.Models.ProductInStockViewModel>
+
+@{
+    ViewBag.Title = "Products in stock";
+}
+<h2>Products in stock at the moment</h2>
+
+@(Html.Kendo().DropDownList()
+    .Name("Category")
+    .DataTextField("CategoryName")
+    .DataValueField("CategoryId")
+    .OptionLabel("All categories")
+    .DataSource(source =>
+    {
+        source.Read("GetCategories", "Report");
+    })
+    .Events(e =>
+        {
+            e.Select("categorySelected");
+        }
+    )
+)
+
+@(Html.Kendo().Grid(Model)
+    .Name("AvailableProducts")
+    .Columns(columns =>
+    {
+        columns.Bound(m => m.ProductName);
+        columns.Bound(m => m.CategoryName);
+        columns.Bound(m => m.Amount);
+        columns.Bound(m => m.PricePerUnit);
+        columns.Bound(m => m.TotalPrice);
+    })
+    .Pageable()
+    .Sortable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(false)
+        .PageSize(15)
+        .Read(read => read.Action("GetProductsInStock", "Report"))
+        )
+)
+
+@section Scripts {
+    <script>
+        function categorySelected(e) {
+            var selectedCat = this.dataItem(e.item.index());
+            var categoryId = selectedCat.CategoryId;
+            if (categoryId != "") {
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "@Url.Action("GetProductsInStockForCategory")",
+                    data: { categoryId: categoryId },
+                    traditional: true,
+                    success: function (result) {
+                        var grid = $("#AvailableProducts").data("kendoGrid");
+                        grid.dataSource.data(result);
+                    },
+                    error: function () {
+                        alert("Unable to get prodcuts by stock");
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "@Url.Action("GetProductsInStock")",
+                    data: { categoryId: categoryId },
+                    traditional: true,
+                    success: function (result) {
+                        var grid = $("#AvailableProducts").data("kendoGrid");
+                        grid.dataSource.data(result);
+                    },
+                    error: function () {
+                        alert("Unable to get prodcuts by stock");
+                    }
+                });
+            }
+        }
+    </script>
+}

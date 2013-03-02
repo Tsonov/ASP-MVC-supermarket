@@ -6,6 +6,9 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/kendoStyle")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/kendo")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -15,6 +18,9 @@
                 <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
             </div>
             <div class="float-right">
+                <div id="availableCashDiv">
+                    <input type="text" id="availableCash" hidden />
+                </div>
                 <section id="login">
                     @Html.Partial("_LoginPartial")
                 </section>
@@ -24,6 +30,8 @@
                         <li>@Html.ActionLink("Categories", "Index", "Category")</li>
                         <li>@Html.ActionLink("Products", "Index", "Product")</li>
                         <li>@Html.ActionLink("Load products", "LoadProducts", "Replenishment")</li>
+                        <li>@Html.ActionLink("Make a sale", "MakeSale", "Sales")</li>
+                        <li>@Html.ActionLink("Reports", "Index", "Report")</li>
                         @if (HttpContext.Current.User.IsInRole("administrator"))
                         {
                             <li>@Html.ActionLink("Manage users", "Index", "User")</li>
@@ -47,7 +55,23 @@
         </div>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "@Url.Action("GetCashAmount", "Home")",
+                    traditional: true,
+                    success: function (result) {
+                        var money = Number(result.availableMoney);
+                        $("#availableCash").val("Money in cash register:" + money).removeProp("hidden");
+                    },
+                    error: function () {
+                        alert("Unable to load the cash register data");
+                    }
+ });
+        });
+    </script>
 </body>
 </html>

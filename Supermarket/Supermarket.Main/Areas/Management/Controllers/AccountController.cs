@@ -9,7 +9,7 @@ using WebMatrix.WebData;
 
 namespace Supermarket.Main.Areas.Management.Controllers
 {
-    public class AccountController : AbstractAuthorizedController
+    public class AccountController : AbstractManagementAuthorizedController
     {
 
         //

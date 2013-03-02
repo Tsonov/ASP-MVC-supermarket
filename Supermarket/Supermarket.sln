@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Main", "Superma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Main.Tests", "Supermarket.Main.Tests\Supermarket.Main.Tests.csproj", "{75BCEBD8-49CD-4151-84E3-A41E84353971}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{88E27871-ECA6-4DEE-A585-5A284AC52D0C}"
+	ProjectSection(SolutionItems) = preProject
+		Libraries\Kendo.Mvc.dll = Libraries\Kendo.Mvc.dll
+		Libraries\Kendo.Mvc.xml = Libraries\Kendo.Mvc.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 4

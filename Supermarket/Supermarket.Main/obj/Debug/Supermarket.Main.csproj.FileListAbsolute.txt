@@ -41,3 +41,8 @@ D:\Programming\Repositories\ASP-MVC-supermarket\Supermarket\Supermarket.Main\bin
 D:\Programming\Repositories\ASP-MVC-supermarket\Supermarket\Supermarket.Main\bin\WebActivator.dll
 D:\Programming\Repositories\ASP-MVC-supermarket\Supermarket\Supermarket.Main\bin\StructureMap.pdb
 D:\Programming\Repositories\ASP-MVC-supermarket\Supermarket\Supermarket.Main\bin\StructureMap.xml
+D:\Programming\Repositories\ASP-MVC-supermarket\Supermarket\Supermarket.Main\bin\Kendo.Mvc.dll
+D:\Programming\Repositories\ASP-MVC-supermarket\Supermarket\Supermarket.Main\bin\Kendo.Mvc.xml
+D:\Programming\Repositories\ASP-MVC-supermarket\Supermarket\Supermarket.Main\obj\Debug\Supermarket.Main.Migrations.CustomChecksMigration.resources
+D:\Programming\Repositories\ASP-MVC-supermarket\Supermarket\Supermarket.Main\obj\Debug\Supermarket.Main.csproj.GenerateResource.Cache
+D:\Programming\Repositories\ASP-MVC-supermarket\Supermarket\Supermarket.Main\obj\Debug\Supermarket.Main.Migrations.ProductAvailableIsPositiveCheckMigration.resources

@@ -9,7 +9,7 @@ using Supermarket.Main.Areas.Management.Models;
 
 namespace Supermarket.Main.Areas.Management.Controllers
 {
-    public class CategoryController : AbstractAuthorizedController
+    public class CategoryController : AbstractManagementAuthorizedController
     {
 
         private readonly ISupermarketItemsRepository _itemsRepository;
@@ -74,6 +74,11 @@ namespace Supermarket.Main.Areas.Management.Controllers
             if (ModelState.IsValid)
             {
                 Category newCat = new Category() { Name = model.Name };
+                if (_itemsRepository.CategoryExists(newCat))
+                {
+                    ModelState.AddModelError("", "A category with this name already exists");
+                    return View();
+                }
                 _itemsRepository.AddCategory(newCat);
                 _itemsRepository.Save();
                 return RedirectToAction("Index");
@@ -112,6 +117,11 @@ namespace Supermarket.Main.Areas.Management.Controllers
             if (ModelState.IsValid)
             {
                 Category editedCat = new Category() { Id = model.Id, Name = model.Name };
+                if (_itemsRepository.DuplicateNameExists(editedCat))
+                {
+                    ModelState.AddModelError("", "A category with this name already exists.");
+                    return View(model);
+                }
                 _itemsRepository.UpdateCategory(editedCat);
                 _itemsRepository.Save();
                 return RedirectToAction("Index");

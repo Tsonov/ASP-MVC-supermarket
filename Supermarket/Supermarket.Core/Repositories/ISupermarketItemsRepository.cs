@@ -15,6 +15,8 @@ namespace Supermarket.Core.Repositories
         void AddCategory(Category category);
         void DeleteCategory(int id);
         void UpdateCategory(Category category);
+        bool CategoryExists(Category category);
+        bool DuplicateNameExists(Category category);
 
         //Products
         IQueryable<Product> GetProducts();

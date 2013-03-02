@@ -12,7 +12,7 @@ using WebMatrix.WebData;
 namespace Supermarket.Main.Areas.Management.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class UserController : AbstractAuthorizedController
+    public class UserController : AbstractManagementAuthorizedController
     {
         private readonly IUsersRepository _usersRepository;
 

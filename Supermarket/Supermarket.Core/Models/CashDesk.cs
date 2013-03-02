@@ -15,8 +15,5 @@ namespace Supermarket.Core.Models
         public int Id { get; set; }
 
         public decimal AvailableAmount { get; set; }
-
-        [Timestamp]
-        public Byte[] TimeStamp { get; set; }
     }
 }

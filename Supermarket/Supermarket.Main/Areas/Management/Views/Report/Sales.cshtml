@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Supermarket.Main.Areas.Management.Models.SaleDetailViewModel>
+
+@{
+    ViewBag.Title = "Sales reports";
+}
+
+<h2>Sales in the given period</h2>
+
+@(Html.Kendo().DatePicker()
+    .Name("StartingDate")
+    .Value(DateTime.Now.AddDays(-7))
+    .Max(DateTime.Now)
+    )
+
+
+@(Html.Kendo().DatePicker()
+    .Name("EndDate")
+    .Value(DateTime.Now)
+    .Max(DateTime.Now)
+    )
+
+<input type="button" id="getSales" value = "Get sales" />
+
+@(Html.Kendo().Grid(Model)
+    .Name("salesInPeriod")
+    .Columns(col =>
+    {
+        col.Bound(m => m.DateAndTime);
+        col.Bound(m => m.ProductName);
+        col.Bound(m => m.AmountSold);
+        col.Bound(m => m.MoneyReceived);
+    })
+    .Pageable()
+    .Sortable()
+    .DataSource(source => source
+        .Ajax()
+        .ServerOperation(false)
+        .PageSize(15)
+        )
+)
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#getSales").on("click", populateGrid)
+        })
+
+        function populateGrid() {
+            var start = $("#StartingDate").data("kendoDatePicker");
+            var end = $("#EndDate").data("kendoDatePicker");
+            if (start.value() != null && end.value() != null) {
+                var startDate = kendo.toString(start.value(), 'd');
+                var endDate = kendo.toString(end.value(), 'd');
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "@Url.Action("SalesInPeriod")",
+                    data: { start: startDate, end: endDate },
+                    traditional: true,
+                    success: function (result) {
+                        if (result.success) {
+                            var grid = $("#salesInPeriod").data("kendoGrid");
+                            grid.dataSource.data(result.data);
+                        } else {
+                            alert(result.error);
+                        }
+                    },
+                    error: function () {
+                        alert("Could not get the sales. Please try again or contact an administrator");
+                    }
+                });
+            }
+        };
+    </script>
+}

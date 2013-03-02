@@ -25,6 +25,15 @@ namespace Supermarket.Core.Models
 
         public double Amount { get; set; }
 
-        public decimal TotalPaidByCustomer { get; set; }
+        public decimal PricePerUnit { get; set; }
+
+        [NotMapped]
+        public decimal TotalMoney
+        {
+            get
+            {
+                return new Decimal(Amount) * PricePerUnit;
+            }
+        }
     }
 }

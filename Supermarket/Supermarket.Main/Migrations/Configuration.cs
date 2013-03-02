@@ -14,7 +14,7 @@ namespace Supermarket.Main.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Supermarket.Main.DataInfrastructure.SupermarketDB context)

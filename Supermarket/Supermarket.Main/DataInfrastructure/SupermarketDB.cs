@@ -26,11 +26,12 @@ namespace Supermarket.Main.DataInfrastructure
         public DbSet<Category> Categories { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<CashDesk> CashDesk { get; set; }
-        public DbSet<ProductReplenishment> ProductReplenishmets { get; set; }
+        public DbSet<Replenishment> Replenishments { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
         public DbSet<ReplenishmentDetail> ReplenishmentDetails { get; set; }
-        public DbSet<ProductHistory> ProductHistories { get; set; }
-        public DbSet<HistoryProductInfo> HistoryProductInfos { get; set; }
+        public DbSet<ProductInStock> ProductsInStock { get; set; }
+        public DbSet<ProductAvailability> ProductAvailabilities { get; set; }
+        public DbSet<ProductAvailabilityDetail> ProductAvailabilitiesDetails { get; set; }
     }
 }

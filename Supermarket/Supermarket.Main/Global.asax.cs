@@ -41,6 +41,9 @@ namespace Supermarket.Main
             {
                 x.For<IUsersRepository>().HttpContextScoped().Use<UsersRepository>();
                 x.For<ISupermarketItemsRepository>().HttpContextScoped().Use<SupermarketItemsRepository>();
+                x.For<IReplenishmentRepository>().HttpContextScoped().Use<ReplenishmentRepository>();
+                x.For<IReportsRepository>().HttpContextScoped().Use<ReportsRepository>();
+                x.For<ISalesRepository>().HttpContextScoped().Use<SalesRepository>();
             });
         }
 

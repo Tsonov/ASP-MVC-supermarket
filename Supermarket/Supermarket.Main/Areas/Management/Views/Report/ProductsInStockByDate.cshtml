@@ -1,0 +1,63 @@
+﻿@model Supermarket.Main.Areas.Management.Models.ProductInStockViewModel
+
+@{
+    ViewBag.Title = "Report by date";
+}
+
+<h2>Reports by date</h2>
+
+@(Html.Kendo().DatePicker()
+    .Name("DateForReport")
+    .Value(DateTime.Now)
+    .Max(DateTime.Now)
+    .Events(e =>
+        {
+            e.Change("getStockInfo");
+        })
+    )
+
+@(Html.Kendo().Grid<Supermarket.Main.Areas.Management.Models.ProductInStockViewModel>()
+    .Name("reportsByDateGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(m => m.ProductName);
+        columns.Bound(m => m.CategoryName);
+        columns.Bound(m => m.Amount);
+    })
+    .AutoBind(false)
+    .Pageable()
+    .Sortable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(false)   
+        .PageSize(15) 
+     )
+)
+
+@section Scripts {
+    <script type="text/javascript">
+        function getStockInfo() {
+            if (this.value() != null) {
+                var date = kendo.toString(this.value(), 'd');
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "@Url.Action("GetAvailabilitiesByDate")",
+                    data: { date: date },
+                    traditional: true,
+                    success: function (result) {
+                        if (result.success) {
+                            var grid = $("#reportsByDateGrid").data("kendoGrid");
+                            grid.dataSource.data(result.data);
+                        } else {
+                            alert(result.error);
+                        }
+                    },
+                    error: function () {
+                        alert("An error has occurred, please try again or inform an administrator!");
+                    }
+                });
+            }
+        }
+    </script>
+}

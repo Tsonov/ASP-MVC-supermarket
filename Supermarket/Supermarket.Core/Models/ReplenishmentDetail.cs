@@ -20,10 +20,10 @@ namespace Supermarket.Core.Models
 
         public double Amount { get; set; }
 
-        public int ProductReplenishmentId { get; set; }
+        public int ReplenishmentId { get; set; }
 
-        public virtual ProductReplenishment ProductReplenishment { get; set; }
+        public virtual Replenishment Replenishment { get; set; }
 
-        public decimal TotalPaidForProduct { get; set; }
+        public decimal PricePerUnit { get; set; }
     }
 }

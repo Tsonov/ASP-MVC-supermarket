@@ -10,7 +10,7 @@ namespace Supermarket.Main.Areas.Management.Controllers
     /// Used to specify a base controller that requires authorization.
     /// </summary>
     [Authorize]
-    public abstract class AbstractAuthorizedController : Controller
+    public abstract class AbstractManagementAuthorizedController : Controller
     {
         //Nothing to do  here
     }

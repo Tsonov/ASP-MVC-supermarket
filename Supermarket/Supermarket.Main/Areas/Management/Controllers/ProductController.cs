@@ -10,7 +10,7 @@ using Supermarket.Main.Areas.Management.Models;
 
 namespace Supermarket.Main.Areas.Management.Controllers
 {
-    public class ProductController : AbstractAuthorizedController
+    public class ProductController : AbstractManagementAuthorizedController
     {
         private readonly ISupermarketItemsRepository _itemsRepository;
 

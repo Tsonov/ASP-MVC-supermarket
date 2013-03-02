@@ -18,6 +18,26 @@ namespace Supermarket.Main.DataInfrastructure
             return categories;
         }
 
+        public bool DuplicateNameExists(Category category)
+        {
+            var possibleDuplicates = _context.Categories
+                .AsNoTracking()
+                .Where(cat => cat.IsActive == true
+                    && cat.Name.Equals(category.Name, StringComparison.InvariantCultureIgnoreCase)
+                    && cat.Id != category.Id);
+            bool result = possibleDuplicates.Count() > 0;
+            return result;
+        }
+
+        public bool CategoryExists(Category category)
+        {
+            bool result = _context.Categories
+                .AsNoTracking()
+                .Where(cat => cat.IsActive == true)
+                .SingleOrDefault(cat => cat.Name.Equals(category.Name, StringComparison.InvariantCultureIgnoreCase)) != null;
+            return result;
+        }
+
         public Category GetCategory(int id)
         {
             Category cat = GetSingleActiveCategoryOrNull(id);
