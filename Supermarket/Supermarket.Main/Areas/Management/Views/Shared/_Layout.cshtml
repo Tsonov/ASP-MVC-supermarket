@@ -15,12 +15,9 @@
     <header>
         <div class="content-wrapper">
             <div class="float-left">
-                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                <p class="site-title">@Html.ActionLink("ASMS", "Index", "Home")</p>
             </div>
             <div class="float-right">
-                <div id="availableCashDiv">
-                    <input type="text" id="availableCash" hidden />
-                </div>
                 <section id="login">
                     @Html.Partial("_LoginPartial")
                 </section>
@@ -38,6 +35,9 @@
                         }
                     </ul>
                 </nav>
+                <div id="availableCashDiv" class="float-right">
+                    <input type="text" id="availableCash" hidden disabled />
+                </div>
             </div>
         </div>
     </header>

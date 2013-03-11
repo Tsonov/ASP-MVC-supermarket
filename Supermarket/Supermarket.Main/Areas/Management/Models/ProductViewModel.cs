@@ -20,6 +20,8 @@ namespace Supermarket.Main.Areas.Management.Models
         public string Manufacturer { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
+        [Range(0.01, 1000000000, ErrorMessage = "The price must be at least {1}")]
         public decimal Price { get; set; }
 
         [Required]
@@ -29,6 +31,7 @@ namespace Supermarket.Main.Areas.Management.Models
 
         public int CategoryId { get; set; }
 
+        [Display(Name="Category")]
         public string CategoryName { get; set; }
     }
 }

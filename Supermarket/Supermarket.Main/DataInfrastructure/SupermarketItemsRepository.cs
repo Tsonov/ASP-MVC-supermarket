@@ -12,10 +12,10 @@ namespace Supermarket.Main.DataInfrastructure
         private readonly SupermarketDB _context = new SupermarketDB();
 
         #region Categories
-        public IQueryable<Category> GetCategories()
+        public IList<Category> GetCategories()
         {
             var categories = _context.Categories.Where(cat => cat.IsActive == true);
-            return categories;
+            return categories.ToList();
         }
 
         public bool DuplicateNameExists(Category category)
@@ -95,10 +95,10 @@ namespace Supermarket.Main.DataInfrastructure
 
         #region Products
 
-        public IQueryable<Product> GetProducts()
+        public IList<Product> GetProducts()
         {
             var products = _context.Products.Where(p => p.IsActive == true);
-            return products;
+            return products.ToList();
         }
 
         public Product GetProduct(int id)

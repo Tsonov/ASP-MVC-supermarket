@@ -11,7 +11,8 @@ namespace Supermarket.Core.Repositories
     {
         IEnumerable<Product> GetAvailableProducts();
         void MakeSale(IEnumerable<SaleDetail> saleDetails);
-        decimal GetStorePriceFor(int productId);
+        Product GetProduct(int productId);
+        double GetAvailableAmount(int productId);
         void Save();
     }
 }

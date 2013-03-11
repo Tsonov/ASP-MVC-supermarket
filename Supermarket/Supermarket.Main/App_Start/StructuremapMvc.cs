@@ -1,5 +1,6 @@
 using System.Web.Mvc;
 using StructureMap;
+using Supermarket.Main.DependencyResolution;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Supermarket.Main.App_Start.StructuremapMvc), "Start")]
 

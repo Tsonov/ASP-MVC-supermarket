@@ -11,17 +11,17 @@ namespace Supermarket.Main.DataInfrastructure
 {
     public class UsersRepository : IUsersRepository
     {
-        private SupermarketDB _context = new SupermarketDB();
+        private readonly SupermarketDB _context = new SupermarketDB();
 
         public void AddUser(string userName, string password, string email, string firstName = "", string lastName = "")
         {
             WebSecurity.CreateUserAndAccount(userName, password, new { Email = email, FirstName = firstName, LastName = lastName });
         }
 
-        public IQueryable<UserProfile> GetUsers()
+        public IEnumerable<UserProfile> GetUsers()
         {
             var users = _context.UserProfiles;
-            return users;
+            return users.AsEnumerable();
         }
 
         public UserProfile GetUser(int id)

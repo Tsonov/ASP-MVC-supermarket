@@ -1,10 +1,10 @@
 ﻿@model Supermarket.Main.Areas.Management.Models.ProductWithCategoriesViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit " + Model.ProductModel.Name;
 }
 
-<h2>Edit</h2>
+<h2>Edit @Model.ProductModel.Name</h2>
 
 @using (Html.BeginForm())
 {
@@ -52,8 +52,17 @@
             @Html.LabelFor(model => model.ProductModel.CategoryName)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("categoryId", Model.AvailableCategories
-            .Select(cat => new SelectListItem() { Text = cat.Name, Value = cat.Id.ToString(), Selected = cat.Id == Model.ProductModel.CategoryId }))
+            @(Html.Kendo().DropDownList()
+            .Name("categoryId")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .BindTo(Model.AvailableCategories.Select(cat => new SelectListItem()
+            {
+                Text = cat.Name,
+                Value = cat.Id.ToString(),
+                Selected = cat.Id == Model.ProductModel.CategoryId
+            }))
+        )
         </div>
 
         <p>

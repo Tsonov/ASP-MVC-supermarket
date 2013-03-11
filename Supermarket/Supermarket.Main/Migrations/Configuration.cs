@@ -14,7 +14,7 @@ namespace Supermarket.Main.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Supermarket.Main.DataInfrastructure.SupermarketDB context)
@@ -29,8 +29,7 @@ namespace Supermarket.Main.Migrations
                 new Category { Name = "Food", IsActive = true });
 
             context.SaveChanges();
-            context.Products.AddOrUpdate(d => d.Name,
-                new Product
+            Product borovec = new Product
                 {
                     Name = "Borovec",
                     CategoryId = context.Categories.Single(cat => cat.Name == "Food").Id,
@@ -38,9 +37,8 @@ namespace Supermarket.Main.Migrations
                     Price = 1.5m,
                     UnitMeasure = "broi",
                     IsActive = true,
-                    Amount = 0,
-                },
-                new Product
+                };
+            Product cocaCola = new Product
                 {
                     Name = "Coca-cola",
                     CategoryId = context.Categories.Single(cat => cat.Name == "Beverages").Id,
@@ -48,13 +46,31 @@ namespace Supermarket.Main.Migrations
                     Price = 2.5m,
                     UnitMeasure = "l",
                     IsActive = true,
-                    Amount = 0,
+                };
+            context.Products.AddOrUpdate(d => d.Name,
+                borovec, cocaCola);
+
+            if (context.ProductAvailabilities.Count() == 0)
+            {
+                ProductAvailability availability = new ProductAvailability()
+                {
+                    Date = DateTime.Now.Date,
+                    ProductInfos = new HashSet<ProductAvailabilityDetail>()
+                };
+                availability.ProductInfos.Add(new ProductAvailabilityDetail()
+                {
+                    Amount = 5,
+                    Product = borovec,
                 });
+                availability.ProductInfos.Add(new ProductAvailabilityDetail()
+                {
+                    Amount = 5,
+                    Product = cocaCola,
+                });
+                context.ProductAvailabilities.Add(availability);
+            }
 
 
-
-
-            //TODO export this ?
             WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
 
             var roleProvider = (SimpleRoleProvider)Roles.Provider;

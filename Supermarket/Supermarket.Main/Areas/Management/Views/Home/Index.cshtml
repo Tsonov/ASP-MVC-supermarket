@@ -1,3 +1,32 @@
 ﻿@{
     ViewBag.Title = "Management";
 }
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>Welcome to the management section of ASMS!</h1>
+            </hgroup>
+            <p>
+                Here you can manage all supermarket operations. In order to do so, choose an option from the links below.
+                 You can also navigate using the links in the menu above.
+            </p>
+        </div>
+    </section>
+}
+
+
+<h3>Please select what you wish to do:</h3>
+<ol class="round">
+    <li class="one">@Html.ActionLink("Manage categories", "Index", "Category")
+    </li>
+    <li class="two">@Html.ActionLink("Manage products", "Index", "Product")</li>
+    <li class="three">@Html.ActionLink("Load products in the supermarket", "LoadProducts", "Replenishment")</li>
+    <li class="four">@Html.ActionLink("Make sales", "MakeSale", "Sales")</li>
+    <li class="five">@Html.ActionLink("See reports", "Index", "Report")</li>
+    @if (HttpContext.Current.User.IsInRole("administrator"))
+    {
+        <li class="six">@Html.ActionLink("Manage users", "Index", "User")</li>
+    }
+</ol>

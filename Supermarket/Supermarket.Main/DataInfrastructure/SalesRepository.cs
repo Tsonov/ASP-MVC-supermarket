@@ -22,16 +22,12 @@ namespace Supermarket.Main.DataInfrastructure
                 return null;
             }
 
-            var result = availabilityInfo.ProductInfos.Where(x => x.Product.IsActive == true && x.Amount > 0).Select(x => x.Product);
+            var result = availabilityInfo.ProductInfos.Where(x => x.Product.IsActive == true && x.Amount >= 0).Select(x => x.Product);
             return result;
         }
 
         public void MakeSale(IEnumerable<SaleDetail> saleDetails)
         {
-            //Remove availabilities and revert if needed
-            //Add money
-            //Add sale
-            //Add sale details
             decimal amountToReceive = saleDetails.Sum(x => x.PricePerUnit * new Decimal(x.Amount));
             _context.CashDesk.Single().AvailableAmount += amountToReceive;
             this.MakeSales(saleDetails, amountToReceive);
@@ -112,16 +108,38 @@ namespace Supermarket.Main.DataInfrastructure
         }
 
 
-        public decimal GetStorePriceFor(int productId)
+        public Product GetProduct(int productId)
         {
             var product = _context.Products.AsNoTracking().SingleOrDefault(x => x.Id == productId && x.IsActive == true);
             if (product == null)
             {
                 throw new InvalidOperationException("Invalid product selected, it isn't available in the store!");
             }
-            return product.Price;
+            return product;
         }
 
+        public double GetAvailableAmount(int productId)
+        {
+            var product = GetProduct(productId);
+            var todayAvailability = _context.ProductAvailabilities
+                .AsNoTracking()
+                .OrderByDescending(x => x.Date)
+                .FirstOrDefault();
+            if (todayAvailability == null)
+            {
+                //No available products at all
+                return 0;
+            }
+            var productInStock = todayAvailability.ProductInfos.Single(x => x.ProductId == product.Id);
+            if (productInStock == null)
+            {
+                //Product isn't in stock
+                return 0;
+            }
+
+            double amount = productInStock.Amount;
+            return amount;
+        }
 
         public void Save()
         {

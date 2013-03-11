@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using StructureMap;
 using Supermarket.Core.Repositories;
+using Supermarket.Main.App_Start;
 using Supermarket.Main.DataInfrastructure;
 using WebMatrix.WebData;
 
@@ -27,6 +26,7 @@ namespace Supermarket.Main
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             MapperConfig.RegisterMaps();
+            InitStructureMap();
             //Used for membership
             WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
 

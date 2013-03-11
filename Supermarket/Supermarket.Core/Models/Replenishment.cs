@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Supermarket.Core.Models
 {
@@ -18,7 +15,7 @@ namespace Supermarket.Core.Models
 
         public virtual ICollection<ReplenishmentDetail> ReplenishmentDetails { get; set; }
 
-        [Range(0, double.MaxValue)]
+        [Range(0, 1000000000)]
         public decimal TotalAmountPaid { get; set; }
     }
 }

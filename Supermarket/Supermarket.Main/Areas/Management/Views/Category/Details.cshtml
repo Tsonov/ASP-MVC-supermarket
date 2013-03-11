@@ -1,28 +1,40 @@
 ﻿@model Supermarket.Main.Areas.Management.Models.CategoryViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details for " + Model.Name;
 }
 
-<h2>Details</h2>
+<h2>@Model.Name</h2>
 
 <fieldset>
-    <legend>CategoryViewModel</legend>
+    <legend>Category fields</legend>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Products)</td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-    <ul>
-@foreach (var product in Model.Products)
-{
-    <li>@Html.ActionLink(product.Name, "Details", "Product", new { id = product.Id }, null)</li>
-}
-    </ul>
+                <td>
+                    <ul>
+                        @foreach (var product in Model.Products)
+                        {
+                            <li>@Html.ActionLink(product.Name, "Details", "Product", new { id = product.Id }, null)</li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                    @Html.ActionLink("Back to List", "Index")</td>
+            </tr>
+        </tbody>
+    </table>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -12,6 +12,7 @@ namespace Supermarket.Main.Migrations
         
         public override void Down()
         {
+            Sql("ALTER TABLE [dbo].[ProductAvailabilitiesDetails] DROP CONSTRAINT [CK_Positive_Product_Amount]");
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace Supermarket.Main
+namespace Supermarket.Main.App_Start
 {
     public class BundleConfig
     {

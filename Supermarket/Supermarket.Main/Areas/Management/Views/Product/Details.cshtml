@@ -1,50 +1,44 @@
 ﻿@model Supermarket.Main.Areas.Management.Models.ProductViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details for " + Model.Name;
 }
 
-<h2>Details</h2>
+<h2>Details for @Model.Name</h2>
 
-<fieldset>
-    <legend>ProductViewModel</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Manufacturer)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Manufacturer)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.UnitMeasure)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.UnitMeasure)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Price)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Price)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CategoryName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CategoryName)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<table>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Name)</td>
+            <td>@Html.DisplayFor(model => model.Name)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Manufacturer)</td>
+            <td>@Html.DisplayFor(model => model.Manufacturer)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.UnitMeasure)</td>
+            <td>@Html.DisplayFor(model => model.UnitMeasure)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Price)</td>
+            <td>@Html.DisplayFor(model => model.Price)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.CategoryName)</td>
+            <td>@Html.DisplayFor(model => model.CategoryName)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </td>
+        </tr>
+    </tfoot>
+</table>

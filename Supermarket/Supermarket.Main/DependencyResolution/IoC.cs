@@ -1,8 +1,9 @@
 using StructureMap;
-using Supermarket.Core.Repositories;
-using Supermarket.Main.DataInfrastructure;
-namespace Supermarket.Main {
-    public static class IoC {
+
+namespace Supermarket.Main.DependencyResolution
+{
+    public static class IoC
+    {
         public static IContainer Initialize() {
             ObjectFactory.Initialize(x =>
                         {
@@ -14,7 +15,5 @@ namespace Supermarket.Main {
                         });
             return ObjectFactory.Container;
         }
-
-
     }
 }

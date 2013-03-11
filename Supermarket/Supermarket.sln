@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Core", "Superma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Main", "Supermarket.Main\Supermarket.Main.csproj", "{691D5138-C991-4EE1-B6EC-03751CB80AF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Main.Tests", "Supermarket.Main.Tests\Supermarket.Main.Tests.csproj", "{75BCEBD8-49CD-4151-84E3-A41E84353971}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{88E27871-ECA6-4DEE-A585-5A284AC52D0C}"
 	ProjectSection(SolutionItems) = preProject
 		Libraries\Kendo.Mvc.dll = Libraries\Kendo.Mvc.dll
@@ -15,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tsonov.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -25,9 +23,6 @@ Global
 		SccProjectUniqueName2 = Supermarket.Main\\Supermarket.Main.csproj
 		SccProjectName2 = Supermarket.Main
 		SccLocalPath2 = Supermarket.Main
-		SccProjectUniqueName3 = Supermarket.Main.Tests\\Supermarket.Main.Tests.csproj
-		SccProjectName3 = Supermarket.Main.Tests
-		SccLocalPath3 = Supermarket.Main.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,10 +37,6 @@ Global
 		{691D5138-C991-4EE1-B6EC-03751CB80AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{691D5138-C991-4EE1-B6EC-03751CB80AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{691D5138-C991-4EE1-B6EC-03751CB80AF4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75BCEBD8-49CD-4151-84E3-A41E84353971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75BCEBD8-49CD-4151-84E3-A41E84353971}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75BCEBD8-49CD-4151-84E3-A41E84353971}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75BCEBD8-49CD-4151-84E3-A41E84353971}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

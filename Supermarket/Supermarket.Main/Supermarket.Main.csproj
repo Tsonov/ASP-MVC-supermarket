@@ -152,7 +152,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Management\Controllers\AbstractAuthorizedController.cs" />
+    <Compile Include="Areas\Management\Controllers\AbstractManagementAuthorizedController.cs" />
     <Compile Include="Areas\Management\Controllers\AccountController.cs" />
     <Compile Include="Areas\Management\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Management\Controllers\HomeController.cs" />
@@ -163,15 +163,14 @@
     <Compile Include="Areas\Management\Controllers\UserController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Areas\Management\Models\CategoryViewModel.cs" />
-    <Compile Include="Areas\Management\Models\LocalPasswordModel.cs" />
+    <Compile Include="Areas\Management\Models\LocalPasswordViewModel.cs" />
     <Compile Include="Areas\Management\Models\ProductInStockViewModel.cs" />
-    <Compile Include="Areas\Management\Models\ProductOperationsViewModel.cs" />
     <Compile Include="Areas\Management\Models\ProductViewModel.cs" />
     <Compile Include="Areas\Management\Models\ProductWithCategoriesViewModel.cs" />
     <Compile Include="Areas\Management\Models\ProductOperationDetailsViewModel.cs" />
     <Compile Include="Areas\Management\Models\SaleDetailViewModel.cs" />
     <Compile Include="Areas\Management\Models\UserInfoViewModel.cs" />
-    <Compile Include="Areas\Management\Models\UserRegisterViewModel.cs" />
+    <Compile Include="Areas\Management\Models\UserFullViewModel.cs" />
     <Compile Include="Attributes\ValidateJsonAntiForgeryTokenAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -248,6 +247,8 @@
     <Content Include="Areas\Management\Views\Report\ProductsInStockByDate.cshtml" />
     <Content Include="Areas\Management\Views\Sales\MakeSale.cshtml" />
     <Content Include="Areas\Management\Views\Report\Sales.cshtml" />
+    <Content Include="Areas\Management\Views\Shared\EditorTemplates\Double.cshtml" />
+    <Content Include="Areas\Management\Views\Shared\EditorTemplates\Currency.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -306,20 +307,11 @@
     <Content Include="Areas\Management\Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Areas\Management\Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Areas\Management\Views\Account\Manage.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />

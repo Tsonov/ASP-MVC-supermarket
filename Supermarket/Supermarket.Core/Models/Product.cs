@@ -26,9 +26,6 @@ namespace Supermarket.Core.Models
         [Required]
         public decimal Price { get; set; }
 
-        [Range(0, double.MaxValue)]
-        public double Amount { get; set; }
-
         public bool IsActive { get; set; }
 
         public int CategoryId { get; set; }

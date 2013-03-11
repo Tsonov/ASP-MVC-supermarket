@@ -10,6 +10,7 @@ namespace Supermarket.Core.Repositories
     public interface IReplenishmentRepository : ICashRepository
     {
         IEnumerable<Product> GetAvailableProducts();
+        Product GetProduct(int productId);
         bool EnoughMoneyInCashDeskForPayment(decimal amountToPay);
         void MakeReplenishment(IEnumerable<ReplenishmentDetail> replenishments);
         void Save();

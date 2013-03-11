@@ -7,7 +7,7 @@
 <h2>Add new user to the system</h2>
 
 @using (Html.BeginForm()) {
-    @Html.AntiForgeryToken();
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>

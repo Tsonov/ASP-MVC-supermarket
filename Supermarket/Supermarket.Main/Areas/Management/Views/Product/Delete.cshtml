@@ -1,54 +1,58 @@
 ﻿@model Supermarket.Main.Areas.Management.Models.ProductViewModel
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete " + Model.Name;
 }
 
-<h2>Delete</h2>
+<h2>Delete @Model.Name</h2>
 
 <h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>ProductViewModel</legend>
+<table>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Name)</td>
+            <td>@Html.DisplayFor(model => model.Name)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Manufacturer)</td>
+            <td>@Html.DisplayFor(model => model.Manufacturer)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.UnitMeasure)</td>
+            <td>@Html.DisplayFor(model => model.UnitMeasure)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Price)</td>
+            <td>@Html.DisplayFor(model => model.Price)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.CategoryName)</td>
+            <td>@Html.DisplayFor(model => model.CategoryName)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Manufacturer)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Manufacturer)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Price)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Price)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.UnitMeasure)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.UnitMeasure)
-    </div>
-
-    <div>
-        @Html.DisplayNameFor(model => model.CategoryName)
-    </div>
-    <div>
-        @Html.DisplayFor(model => model.CategoryName)
-    </div>
-</fieldset>
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
+        <input type="submit" value="Delete" />
+        |
+        <input type="button" value="Back to list" id="backToList" />
     </p>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#backToList").on("click", function () {
+                window.location.replace("@Url.Action("Index")");
+            })
+        });
+
+    </script>
 }

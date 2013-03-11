@@ -10,7 +10,7 @@ namespace Supermarket.Core.Repositories
     public interface ISupermarketItemsRepository : IDisposable
     {
         //Categories
-        IQueryable<Category> GetCategories();
+        IList<Category> GetCategories();
         Category GetCategory(int id);
         void AddCategory(Category category);
         void DeleteCategory(int id);
@@ -19,7 +19,7 @@ namespace Supermarket.Core.Repositories
         bool DuplicateNameExists(Category category);
 
         //Products
-        IQueryable<Product> GetProducts();
+        IList<Product> GetProducts();
         Product GetProduct(int id);
         void AddProduct(Product product);
         void DeleteProduct(int id);

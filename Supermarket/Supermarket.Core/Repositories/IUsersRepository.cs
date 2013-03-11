@@ -9,7 +9,7 @@ namespace Supermarket.Core.Repositories
 {
     public interface IUsersRepository : IDisposable
     {
-        IQueryable<UserProfile> GetUsers();
+        IEnumerable<UserProfile> GetUsers();
         UserProfile GetUser(int id);
         void AddUser(string userName, string password, string email, string firstName = "", string lastName = "");
         void DeleteUser(int id);

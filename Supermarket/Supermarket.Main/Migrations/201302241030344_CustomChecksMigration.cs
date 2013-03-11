@@ -13,7 +13,7 @@ namespace Supermarket.Main.Migrations
         
         public override void Down()
         {
-
+            Sql("ALTER TABLE [dbo].[CashDesk] DROP CONSTRAINT [CK_Positive_Money_Amount]");
         }
     }
 }

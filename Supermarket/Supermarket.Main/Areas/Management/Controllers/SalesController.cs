@@ -28,6 +28,7 @@ namespace Supermarket.Main.Areas.Management.Controllers
         {
             ProductOperationDetailsViewModel model = new ProductOperationDetailsViewModel();
             model.AvailableProducts = _salesRepo.GetAvailableProducts().Select(product => new SelectListItem() { Text = product.Name, Value = product.Id.ToString() });
+            model.AvailableProducts.First().Selected = true;
             return View(model);
         }
 
@@ -45,7 +46,7 @@ namespace Supermarket.Main.Areas.Management.Controllers
                 decimal totalAmountToRecieve = 0;
                 foreach (var sale in sales)
                 {
-                    decimal priceInStore = _salesRepo.GetStorePriceFor(sale.ProductId);
+                    decimal priceInStore = _salesRepo.GetProduct(sale.ProductId).Price;
                     if (priceInStore != sale.PricePerUnit)
                     {
                         return new JsonResult()
@@ -88,8 +89,18 @@ namespace Supermarket.Main.Areas.Management.Controllers
         [HttpGet]
         public JsonResult GetProductPrice(int productId)
         {
-            var result = _salesRepo.GetStorePriceFor(productId);
-            return Json(new { price = result }, JsonRequestBehavior.AllowGet);
+            var result = _salesRepo.GetProduct(productId);
+            return Json(new { price = result.Price }, JsonRequestBehavior.AllowGet);
+        }
+
+        //
+        // GET: /Management/Sales/GetAmountInStock
+
+        [HttpGet]
+        public JsonResult GetAmountInStock(int productId)
+        {
+            var result = _salesRepo.GetAvailableAmount(productId);
+            return Json(new { amount = result }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

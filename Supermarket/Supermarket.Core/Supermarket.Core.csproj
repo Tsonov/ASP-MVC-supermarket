@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ProductAvailabilityDetail.cs" />
-    <Compile Include="Models\ProductInStock.cs" />
     <Compile Include="Repositories\ICashRepository.cs" />
     <Compile Include="Repositories\IReplenishmentRepository.cs" />
     <Compile Include="Repositories\IReportsRepository.cs" />

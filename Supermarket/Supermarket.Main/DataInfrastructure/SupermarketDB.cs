@@ -30,7 +30,6 @@ namespace Supermarket.Main.DataInfrastructure
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
         public DbSet<ReplenishmentDetail> ReplenishmentDetails { get; set; }
-        public DbSet<ProductInStock> ProductsInStock { get; set; }
         public DbSet<ProductAvailability> ProductAvailabilities { get; set; }
         public DbSet<ProductAvailabilityDetail> ProductAvailabilitiesDetails { get; set; }
     }

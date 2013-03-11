@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using StructureMap;
 
-namespace Supermarket.Main
+namespace Supermarket.Main.DependencyResolution
 {
     public class SmDependencyResolver : IDependencyResolver {
 

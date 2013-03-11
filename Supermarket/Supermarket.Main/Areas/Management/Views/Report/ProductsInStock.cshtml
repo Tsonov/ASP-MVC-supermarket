@@ -33,6 +33,10 @@
     })
     .Pageable()
     .Sortable()
+    .Events(e =>
+    {
+        e.DataBound("calculateTotal");
+    })
     .DataSource(dataSource => dataSource
         .Ajax()
         .ServerOperation(false)
@@ -40,6 +44,12 @@
         .Read(read => read.Action("GetProductsInStock", "Report"))
         )
 )
+
+<div class="float-right">
+<label for="totalForAll">Total available money in stock:</label>
+<input type="text" id="totalForAll" value="0.00" disabled />
+
+</div>
 
 @section Scripts {
     <script>
@@ -56,6 +66,7 @@
                     success: function (result) {
                         var grid = $("#AvailableProducts").data("kendoGrid");
                         grid.dataSource.data(result);
+                        calculateTotal();
                     },
                     error: function () {
                         alert("Unable to get prodcuts by stock");
@@ -71,12 +82,25 @@
                     success: function (result) {
                         var grid = $("#AvailableProducts").data("kendoGrid");
                         grid.dataSource.data(result);
+                        calculateTotal();
                     },
                     error: function () {
                         alert("Unable to get prodcuts by stock");
                     }
                 });
             }
+        }
+
+        function calculateTotal() {
+            totalAmount = 0;
+            var gridData = $("#AvailableProducts").data("kendoGrid").dataSource.data();
+            if (gridData.length != 0) {
+                $.each(gridData, function (i, row) {
+                    totalAmount += Number(row.TotalPrice);
+                });
+            }
+            totalAmount = totalAmount.toFixed(2);
+            $("#totalForAll").val(totalAmount);
         }
     </script>
 }

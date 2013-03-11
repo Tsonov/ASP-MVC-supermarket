@@ -11,64 +11,102 @@
     <div id="addProductInfo">
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-        @Html.DropDownList("Product", Model.AvailableProducts)
+
+        @(Html.Kendo().DropDownList()
+            .Name("Product")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .BindTo(Model.AvailableProducts)
+            .Events(e =>
+                {
+                    e.Select("productSelected").DataBound("dataBound");
+                })
+        )
 
         @Html.LabelFor(model => model.Amount)
         @Html.EditorFor(model => model.Amount)
         @Html.ValidationMessageFor(model => model.Amount)
 
+        <span id="amountInformation"></span>
         <br />
         <input type="button" id="btnAddProductToList" value="Add to list" />
     </div>
 }
 
-
-<fieldset>
-    <legend>Transactino details</legend>
-    <table id="tblNewProducts">
-        <thead>
-            <tr>
-                <td>Product name</td>
-                <td>Product amount</td>
-                <td>Price per unit</td>
-                <td>Total</td>
-            </tr>
-        </thead>
-        <tbody id="transactionList">
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2">
-                    <input type="text" id="totalPriceForAll" value="0.00" disabled="disabled" />
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-    <p>
-        <input id="submitTransaction" type="button" value="Make transaction" />
-    </p>
-</fieldset>
-
+<div id="grid"></div>
+<label for="totalPriceForAll">Total:</label>
+<input type="text" id="totalPriceForAll" value="0.00" disabled="disabled" />
+<input id="submitTransaction" type="button" value="Make transaction" />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
+        //Initialize kendo grid
+        $(function () {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    pageSize: 15,
+                },
+                pageable: true,
+                schema: {
+                    model: {
+                        id: "ID",
+                        fields: {
+                            ID: { editable: false },
+                            productName: {},
+                            productAmount: {},
+                            pricePerUnit: {},
+                            totalPrice: {},
+                        }
+                    }
+                },
+                columns: [
+                        {
+                            field: "productName",
+                            title: "Product name"
+                        },
+                        {
+                            field: "productAmount",
+                            title: "Product amount"
+                        },
+                        {
+                            field: "pricePerUnit",
+                            title: "Price per unit"
+                        },
+                        {
+                            field: "totalPrice",
+                            title: "Total Price"
+                        },
+                ]
+            });
+        });
+
         $(function () {
             $("#btnAddProductToList").on("click", function () {
-                if ($("#addProductToListForm").valid()) {
-                    var productName = $("#Product").find(":selected").text();
-                    var productId = $("#Product").find(":selected").val();
+                var form = $("#addProductToListForm");
+                form.validate();
+                if (form.valid()) {
+                    var dropDownList = $("#Product").data("kendoDropDownList");
+                    var productName = dropDownList.text();
+                    var productId = dropDownList.value();
                     var amount = $("#@Html.IdFor(model => model.Amount)").val();
-                    var pricePerUnit = getProductPrice(productId);
-                    if (pricePerUnit != -1) {
-                        $("#transactionList")
-                            .append(
-                            '<tr>'
-                            + '<td>' + productName + '<input class="productId" type="hidden" value="' + productId + '" /></td>'
-                            + '<td class="productAmount">' + amount + '</td>'
-                            + '<td class="pricePerUnit">' + pricePerUnit + '</td>'
-                            + '<td class="totalPrice">' + amount * pricePerUnit + '</td></tr>');
-                        calculateTotal();
+                    var amountInStore = getProductsInStock(productId);
+                    if (amount > amountInStore) {
+                        $("#amountInformation").text("There are only " + amountInStore + " units available in stock");
+                    } else {
+                        var pricePerUnit = getProductPrice(productId);
+                        if (pricePerUnit != -1) {
+                            //update kendo
+                            var grid = $("#grid").data("kendoGrid");
+                            grid.dataSource.add({
+                                ID: productId,
+                                productName: productName,
+                                productAmount: amount,
+                                pricePerUnit: pricePerUnit,
+                                totalPrice: amount * pricePerUnit
+                            });
+                            calculateTotal();
+                        }
                     }
                 }
             })
@@ -76,9 +114,12 @@
 
         function calculateTotal() {
             var totalAmount = 0;
-            $("#transactionList td.totalPrice").each(function () {
-                totalAmount += Number($(this).text());
-            });
+            var gridData = $("#grid").data("kendoGrid").dataSource.data();
+            if (gridData.length != 0) {
+                $.each(gridData, function (i, row) {
+                    totalAmount += Number(row.totalPrice);
+                });
+            }
             totalAmount = totalAmount.toFixed(2);
             $("#totalPriceForAll").val(totalAmount);
         }
@@ -108,10 +149,11 @@
             submitButton.on("click", function () {
                 submitButton.prop("disabled", true);
                 var sales = [];
-                $("#transactionList tr").each(function () {
-                    var id = $(this).find(".productId").val();
-                    var amount = $(this).find(".productAmount").text();
-                    var pricePerUnit = $(this).find(".pricePerUnit").text();
+                var gridData = $("#grid").data("kendoGrid").dataSource.data();
+                $.each(gridData, function (i, row) {
+                    var id = row.ID;
+                    var amount = row.productAmount;
+                    var pricePerUnit = row.pricePerUnit;
                     var sale = {
                         ProductId: id,
                         Amount: amount,
@@ -146,6 +188,42 @@
                 submitButton.prop("disabled", false);
             })
         });
+
+
+
+        function getProductsInStock(productId) {
+            productId = Number(productId); //Check in case an invalid argument was given
+            var amount = 0;
+            $.ajax({
+                type: 'Get',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                url: "@Url.Action("GetAmountInStock")",
+                data: { productId: productId },
+                traditional: true,
+                async: false,
+                success: function (jsonFromServer) {
+                    amount = jsonFromServer.amount;
+                }
+            });
+            return amount;
+        }
+
+        function dataBound() {
+            var dropDown = $("#Product").data("kendoDropDownList")
+            var amount = getProductsInStock(dropDown.value());
+            setAmountInfo(amount);
+        }
+
+        function productSelected(e) {
+            var dataItem = this.dataItem(e.item.index());
+            var amount = getProductsInStock(dataItem.Value);
+            setAmountInfo(amount);
+        }
+
+        function setAmountInfo(amount) {
+            $("#amountInformation").text("Currently in stock: " + amount);
+        }
     </script>
 }
 

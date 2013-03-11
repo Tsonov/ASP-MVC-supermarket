@@ -1,17 +1,17 @@
 ﻿@model Supermarket.Main.Areas.Management.Models.CategoryViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit " + Model.Name;
 }
 
-<h2>Edit</h2>
+<h2>Edit category</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>CategoryViewModel</legend>
+        <legend>Edit category fields</legend>
 
         @Html.HiddenFor(model => model.Id)
 

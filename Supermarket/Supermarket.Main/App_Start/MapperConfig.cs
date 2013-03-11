@@ -6,7 +6,7 @@ using AutoMapper;
 using Supermarket.Core.Models;
 using Supermarket.Main.Areas.Management.Models;
 
-namespace Supermarket.Main
+namespace Supermarket.Main.App_Start
 {
     public class MapperConfig
     {

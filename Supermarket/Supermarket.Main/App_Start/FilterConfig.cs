@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Supermarket.Main
+namespace Supermarket.Main.App_Start
 {
     public class FilterConfig
     {

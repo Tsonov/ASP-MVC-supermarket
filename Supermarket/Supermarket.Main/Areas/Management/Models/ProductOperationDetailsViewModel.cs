@@ -14,12 +14,13 @@ namespace Supermarket.Main.Areas.Management.Models
         public int ProductId { get; set; }
 
         [Required(ErrorMessage = "You must enter replenished amount for this product")]
-        [Range(0, double.MaxValue, ErrorMessage = "The amount must be positive")]
+        [Range(Double.Epsilon, double.MaxValue, ErrorMessage = "The amount must be positive")]
         public double Amount { get; set; }
 
         [Display(Name = "Price per unit")]
         [Required(ErrorMessage = "You must enter a price for an unit of this product")]
-        [Range(0, double.MaxValue, ErrorMessage = "The price must be a positive number")]
+        [Range(0.01, 1000000000, ErrorMessage = "The price must be a at least {1}")]
+        [DataType(DataType.Currency)]
         public decimal PricePerUnit { get; set; }
 
     }

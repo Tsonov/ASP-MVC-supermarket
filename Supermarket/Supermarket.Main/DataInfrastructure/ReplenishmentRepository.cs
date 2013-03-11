@@ -50,6 +50,16 @@ namespace Supermarket.Main.DataInfrastructure
             _context.Dispose();
         }
 
+        public Product GetProduct(int productId)
+        {
+            var product = _context.Products.AsNoTracking().SingleOrDefault(x => x.Id == productId && x.IsActive == true);
+            if (product == null)
+            {
+                throw new InvalidOperationException("Invalid product selected, it isn't available in the store!");
+            }
+            return product;
+        }
+
         #region PrivateHelpers
         private void PayFromCashDesk(decimal amountToPay)
         {
@@ -136,5 +146,6 @@ namespace Supermarket.Main.DataInfrastructure
 
         }
         #endregion
+
     }
 }

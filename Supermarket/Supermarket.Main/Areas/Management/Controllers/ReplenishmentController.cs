@@ -84,6 +84,16 @@ namespace Supermarket.Main.Areas.Management.Controllers
             }
         }
 
+        //
+        // GET: /Management/Sales/GetProductPrice
+
+        [HttpGet]
+        public JsonResult GetProductPrice(int productId)
+        {
+            var result = _replenishRepo.GetProduct(productId);
+            return Json(new { price = result.Price }, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             _replenishRepo.Dispose();

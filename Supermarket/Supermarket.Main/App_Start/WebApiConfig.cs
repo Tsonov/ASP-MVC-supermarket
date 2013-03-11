@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace Supermarket.Main
+namespace Supermarket.Main.App_Start
 {
     public static class WebApiConfig
     {
