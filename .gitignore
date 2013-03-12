@@ -1,5 +1,7 @@
 #tfs directory
 $tf/
+#JustCode data
+.JustCode
 
 #################
 ## Visual Studio
